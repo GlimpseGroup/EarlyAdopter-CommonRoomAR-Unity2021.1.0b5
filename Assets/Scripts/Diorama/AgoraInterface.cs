@@ -138,6 +138,15 @@ public class AgoraInterface : MonoBehaviour
     IEnumerator cr_JoinRoomMuteOption()
     {
         yield return new WaitForSeconds(1.5f);
+
+        GameObject count = GameObject.Find("AgoraClientRoles");
+        int broadcasters = 0;
+        foreach (Transform t in count.transform)
+            if (t.tag == "crBroadcaster")
+                broadcasters++;
+        if (broadcasters >= 7)
+            r_Muted = true;
+
         layoutManager.SetMute(r_Muted);
     }
 
@@ -178,6 +187,7 @@ public class AgoraInterface : MonoBehaviour
     public void LeaveToHome()
     {
         mRtcEngine.LeaveChannel();
+        PhotonManager.instance.DeInitialize();
         IRtcEngine.Destroy();
     }
 

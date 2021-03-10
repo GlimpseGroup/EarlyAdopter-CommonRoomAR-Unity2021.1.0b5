@@ -567,6 +567,8 @@ public class DioramaManager : MonoBehaviour
 
         yield return StartCoroutine(CleanUp());
 
+        yield return StartCoroutine(PhotonManager.instance.ConnectToPresentationPhotonRoom(selectedProject.presentationId));
+
         Transform Analytics = Instantiate(ProjectAssets.Find("analytics"));
         Analytics.SetParent(LoadedProject);
         Analytics.gameObject.SetActive(true);
